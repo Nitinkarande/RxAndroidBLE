@@ -87,7 +87,7 @@ class ScanResultsAdapter extends RecyclerView.Adapter<ScanResultsAdapter.ViewHol
     public void onBindViewHolder(ViewHolder holder, int position) {
         final ScanResult rxBleScanResult = data.get(position);
         final RxBleDevice bleDevice = rxBleScanResult.getBleDevice();
-        holder.line1.setText(String.format(Locale.getDefault(), "%s (%s)", bleDevice.getMacAddress(), bleDevice.getName()));
+        holder.line1.setText(String.format(Locale.getDefault(), "%s", bleDevice.getMacAddress()));
         holder.line2.setText(String.format(Locale.getDefault(), "RSSI: %d", rxBleScanResult.getRssi()));
     }
 

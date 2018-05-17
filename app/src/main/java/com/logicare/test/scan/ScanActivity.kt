@@ -10,6 +10,8 @@ import butterknife.ButterKnife
 import com.logicare.test.BleApplication
 import com.logicare.test.R
 import com.logicare.test.ble.BluetoothUUID
+import com.logicare.test.ble.DeviceReadingParser
+import com.logicare.test.ble.Reading
 import com.polidea.rxandroidble2.RxBleClient
 import com.polidea.rxandroidble2.exceptions.BleScanException
 import com.polidea.rxandroidble2.scan.ScanFilter
@@ -42,7 +44,7 @@ class ScanActivity : AppCompatActivity(), View.OnClickListener {
         rxBleClient = BleApplication.getRxBleClient(this)
         configureResultList()
         scan_toggle_btn.setOnClickListener(this)
-
+        onScanToggleClick()
     }
 
     override fun onClick(v: View?) {
@@ -55,9 +57,9 @@ class ScanActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun onScanToggleClick() {
 
-        if (isScanning) {
+   /*     if (isScanning) {
             scanDisposable!!.dispose()
-        } else {
+        } else {*/
             val filter = ScanFilter.Builder()
                     .setServiceUuid(BluetoothUUID.TREEL_TAG_SERVICE_UUID)
                     .build()
@@ -70,13 +72,13 @@ class ScanActivity : AppCompatActivity(), View.OnClickListener {
                     ScanFilter.Builder()
                             //                            .setDeviceAddress("B4:99:4C:34:DC:8B")
                             // add custom filters if needed
-                            .build(),filter
+                            .build()
             )
 
                     .observeOn(AndroidSchedulers.mainThread())
                     .doFinally(Action { this.dispose() })
                     .subscribe(Consumer<ScanResult> { resultsAdapter!!.addScanResult(it) }, Consumer<Throwable> { this.onScanFailure(it) })
-        }
+       // }
 
         updateButtonUIState()
     }
@@ -113,12 +115,12 @@ class ScanActivity : AppCompatActivity(), View.OnClickListener {
     public override fun onPause() {
         super.onPause()
 
-        if (isScanning) {
-            /*
+      /*  if (isScanning) {
+            *//*
              * Stop scanning in onPause callback. You can use rxlifecycle for convenience. Examples are provided later.
-             */
+             *//*
             scanDisposable!!.dispose()
-        }
+        }*/
     }
 
     private fun configureResultList() {
@@ -140,7 +142,7 @@ class ScanActivity : AppCompatActivity(), View.OnClickListener {
         val v = scanResults.scanRecord.manufacturerSpecificData
 
         Log.d("BLE_Nitin", "==$v")
-    //    val reading = parseResponse(scanResults);
+     val reading = parseResponse(scanResults);
        // Log.d("BLE_Nitin", "reading==$reading")
         val macAddress = scanResults.bleDevice.macAddress
       /*  val intent = Intent(this, DeviceActivity::class.java)
@@ -148,9 +150,9 @@ class ScanActivity : AppCompatActivity(), View.OnClickListener {
         startActivity(intent)*/
     }
 
-   /* private fun parseResponse(scanResult: ScanResult): Reading {
+    private fun parseResponse(scanResult: ScanResult): Reading {
         return DeviceReadingParser.parse(scanResult.scanRecord.bytes)
-    }*/
+    }
 
     private fun onScanFailure(throwable: Throwable) {
 

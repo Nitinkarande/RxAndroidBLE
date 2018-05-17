@@ -9,16 +9,17 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin">
 
-    <TextView
+<!--    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello Bluetooth World!"/>
+        android:text="Hello Bluetooth World!"/>-->
 
     <Button
         android:id="@+id/scan_toggle_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/start_scan"/>
+        android:text="@string/start_scan"
+        android:visibility="gone"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/scan_results"

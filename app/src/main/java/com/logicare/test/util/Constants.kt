@@ -1,5 +1,4 @@
-package com.polidea.rxandroidble2.sample.util
-
+package com.logicare.test.util
 import android.os.Environment
 
 /**

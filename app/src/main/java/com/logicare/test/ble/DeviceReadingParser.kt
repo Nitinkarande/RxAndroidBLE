@@ -1,6 +1,7 @@
 package com.logicare.test.ble
 
-import com.polidea.rxandroidble2.sample.util.Constants
+import com.logicare.test.util.Constants
+
 
 /**
  * @author Sanjay Sah
